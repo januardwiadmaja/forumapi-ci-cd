@@ -3,3 +3,6 @@ package-lock.json
 config/database/test.json
 coverage
 .env
+.vscode
+.test.env
+vitest.config.js
