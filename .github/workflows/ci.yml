@@ -11,11 +11,11 @@ jobs:
 
     strategy:
       matrix:
-        node-version: ['24.15.0']
+        node-version: ['22']
 
     services:
       postgres:
-        image: postgres
+        image: postgres:15
         env:
           POSTGRES_USER: ${{ secrets.PGUSER_TEST }}
           POSTGRES_PASSWORD: ${{ secrets.PGPASSWORD_TEST }}
@@ -30,9 +30,9 @@ jobs:
           - 5432:5432
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
       - name: npm install migrate and test
@@ -42,7 +42,7 @@ jobs:
           npm run test
         env:
           CI: true
-          DATABASE_URL: postgres://${{ secrets.PGUSER_TEST }}:${{ secrets.PGPASSWORD_TEST }}@${{ secrets.PGHOST_TEST }}:${{ secrets.PGPORT_TEST }}/${{ secrets.PGDATABASE_TEST }}
+          DATABASE_URL: postgres://${{ secrets.PGUSER_TEST }}:${{ secrets.PGPASSWORD_TEST }}@localhost:5432/${{ secrets.PGDATABASE_TEST }}
 
           ACCESS_TOKEN_KEY: ${{ secrets.ACCESS_TOKEN_KEY_TEST }}
           REFRESH_TOKEN_KEY: ${{ secrets.REFRESH_TOKEN_KEY_TEST }}
