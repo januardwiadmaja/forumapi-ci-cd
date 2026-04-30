@@ -42,8 +42,8 @@ jobs:
           npm run test
         env:
           CI: true
-          DATABASE_URL: postgres://${{ secrets.PGUSER_TEST }}:${{ secrets.PGPASSWORD_TEST }}@localhost:5432/${{ secrets.PGDATABASE_TEST }}
+          DATABASE_URL: 'postgres://${{ secrets.PGUSER_TEST }}:${{ secrets.PGPASSWORD_TEST }}@localhost:5432/${{ secrets.PGDATABASE_TEST }}'
 
-          ACCESS_TOKEN_KEY: ${{ secrets.ACCESS_TOKEN_KEY_TEST }}
-          REFRESH_TOKEN_KEY: ${{ secrets.REFRESH_TOKEN_KEY_TEST }}
-          ACCESS_TOKEN_AGE: ${{ secrets.ACCESS_TOKEN_AGE_TEST }}
+          ACCESS_TOKEN_KEY: '${{ secrets.ACCESS_TOKEN_KEY_TEST }}'
+          REFRESH_TOKEN_KEY: '${{ secrets.REFRESH_TOKEN_KEY_TEST }}'
+          ACCESS_TOKEN_AGE: '${{ secrets.ACCESS_TOKEN_AGE_TEST }}'
