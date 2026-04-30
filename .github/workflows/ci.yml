@@ -42,6 +42,11 @@ jobs:
           npm run test
         env:
           CI: true
+          PGUSER: ${{ secrets.PGUSER_TEST }}
+          PGPASSWORD: ${{ secrets.PGPASSWORD_TEST }}
+          PGDATABASE: ${{ secrets.PGDATABASE_TEST }}
+          PGHOST: localhost
+          PGPORT: 5432
           DATABASE_URL: 'postgres://${{ secrets.PGUSER_TEST }}:${{ secrets.PGPASSWORD_TEST }}@localhost:5432/${{ secrets.PGDATABASE_TEST }}'
 
           ACCESS_TOKEN_KEY: '${{ secrets.ACCESS_TOKEN_KEY_TEST }}'
