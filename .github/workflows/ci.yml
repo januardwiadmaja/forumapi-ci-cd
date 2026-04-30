@@ -42,6 +42,7 @@ jobs:
           npm run test
           env:
           CI: true
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           HOST: ${{ secrets.HOST_TEST }}
           PORT: ${{ secrets.PORT_TEST }}
           PGHOST: ${{ secrets.PGHOST_TEST }}
