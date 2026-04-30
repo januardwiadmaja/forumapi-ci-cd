@@ -40,7 +40,7 @@ jobs:
           npm ci
           npm run migrate up
           npm run test
-          env:
+        env:
           CI: true
           NODE_ENV: production
           DATABASE_URL: postgres://${{ secrets.PGUSER_TEST }}:${{ secrets.PGPASSWORD_TEST }}@${{ secrets.PGHOST_TEST }}:${{ secrets.PGPORT_TEST }}/${{ secrets.PGDATABASE_TEST }}
