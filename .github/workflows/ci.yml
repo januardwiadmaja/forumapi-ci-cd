@@ -42,7 +42,6 @@ jobs:
           npm run test
         env:
           CI: true
-          NODE_ENV: production
           DATABASE_URL: postgres://${{ secrets.PGUSER_TEST }}:${{ secrets.PGPASSWORD_TEST }}@${{ secrets.PGHOST_TEST }}:${{ secrets.PGPORT_TEST }}/${{ secrets.PGDATABASE_TEST }}
 
           ACCESS_TOKEN_KEY: ${{ secrets.ACCESS_TOKEN_KEY_TEST }}
