@@ -42,14 +42,8 @@ jobs:
           npm run test
           env:
           CI: true
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          HOST: ${{ secrets.HOST_TEST }}
-          PORT: ${{ secrets.PORT_TEST }}
-          PGHOST: ${{ secrets.PGHOST_TEST }}
-          PGPORT: ${{ secrets.PGPORT_TEST }}
-          PGUSER: ${{ secrets.PGUSER_TEST }}
-          PGPASSWORD: ${{ secrets.PGPASSWORD_TEST }}
-          PGDATABASE: ${{ secrets.PGDATABASE_TEST }}
+          DATABASE_URL: postgres://${{ secrets.PGUSER_TEST }}:${{ secrets.PGPASSWORD_TEST }}@${{ secrets.PGHOST_TEST }}:${{ secrets.PGPORT_TEST }}/${{ secrets.PGDATABASE_TEST }}
+
           ACCESS_TOKEN_KEY: ${{ secrets.ACCESS_TOKEN_KEY_TEST }}
           REFRESH_TOKEN_KEY: ${{ secrets.REFRESH_TOKEN_KEY_TEST }}
           ACCESS_TOKEN_AGE: ${{ secrets.ACCESS_TOKEN_AGE_TEST }}
