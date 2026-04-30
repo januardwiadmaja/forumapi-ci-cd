@@ -41,8 +41,8 @@ jobs:
           npm run migrate up
           npm run test
           env:
-              CI: true
-              HHOST: ${{ secrets.HOST_TEST }}
+          CI: true
+          HOST: ${{ secrets.HOST_TEST }}
           PORT: ${{ secrets.PORT_TEST }}
           PGHOST: ${{ secrets.PGHOST_TEST }}
           PGPORT: ${{ secrets.PGPORT_TEST }}
