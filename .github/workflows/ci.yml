@@ -11,15 +11,15 @@ jobs:
 
     strategy:
       matrix:
-        node-version: ['24.15.0']
+        node-version: ['22']
 
     services:
       postgres:
-        image: postgres
+        image: postgres:15
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: mysecretpassword
-          POSTGRES_DB: forumapi_test
+          POSTGRES_USER: ${{ secrets.PGUSER_TEST }}
+          POSTGRES_PASSWORD: ${{ secrets.PGPASSWORD_TEST }}
+          POSTGRES_DB: ${{ secrets.PGDATABASE_TEST }}
 
         options: >-
           --health-cmd pg_isready
@@ -30,9 +30,9 @@ jobs:
           - 5432:5432
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
       - name: npm install migrate and test
@@ -40,15 +40,15 @@ jobs:
           npm ci
           npm run migrate up
           npm run test
-          env:
-              CI: true
-              HOST: localhost
-              PORT: 3000
-              PGHOST: localhost
-              PGPORT: 5432
-              PGUSER: postgres
-              PGPASSWORD: mysecretpassword
-              PGDATABASE: forumapi_test
-              ACCESS_TOKEN_KEY: secret
-              REFRESH_TOKEN_KEY: terces
-              ACCESS_TOKEN_AGE: 3600
+        env:
+          CI: true
+          PGUSER: ${{ secrets.PGUSER_TEST }}
+          PGPASSWORD: ${{ secrets.PGPASSWORD_TEST }}
+          PGDATABASE: ${{ secrets.PGDATABASE_TEST }}
+          PGHOST: localhost
+          PGPORT: 5432
+          DATABASE_URL: 'postgres://${{ secrets.PGUSER_TEST }}:${{ secrets.PGPASSWORD_TEST }}@localhost:5432/${{ secrets.PGDATABASE_TEST }}'
+
+          ACCESS_TOKEN_KEY: '${{ secrets.ACCESS_TOKEN_KEY_TEST }}'
+          REFRESH_TOKEN_KEY: '${{ secrets.REFRESH_TOKEN_KEY_TEST }}'
+          ACCESS_TOKEN_AGE: '${{ secrets.ACCESS_TOKEN_AGE_TEST }}'
