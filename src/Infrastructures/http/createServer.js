@@ -46,9 +46,6 @@ const createServer = async (container) => {
   app.use('/threads', comments(container, authMiddleware));
   app.use('/threads', replies(container, authMiddleware));
 
-  app.get('/', (req, res) => {
-    res.status(200).json({ data: 'Hello world!' });
-  });
   // Global error handler
   app.use((error, req, res, next) => {
     // bila response tersebut error, tangani sesuai kebutuhan
